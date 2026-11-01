@@ -415,7 +415,7 @@ const client = new Anthropic()
 
 await capture("generate-reply", async () => {
   const message = await client.messages.create({
-    model: "claude-sonnet-4-20250514",
+    model: "claude-haiku-5-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello" }],
   })
@@ -442,7 +442,7 @@ client = Anthropic()
 
 def generate_reply():
     message = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-haiku-5-5",
         max_tokens=1024,
         messages=[{"role": "user", "content": "Hello"}],
     )
@@ -1206,7 +1206,7 @@ latitude = Latitude(
 def main():
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
     response = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="gemini-3.8-flash",
         contents="Hello",
     )
     return response.text

@@ -116,3 +116,17 @@ describe("Bedrock and Vertex AI onboarding snippets", () => {
     expect(getOnboardingSnippet("vertexai", "python", "my-project", "lat-key")).toContain("gemini-3.8-flash")
   })
 })
+
+describe("Anthropic and Google GenAI onboarding snippets", () => {
+  it.each([
+    ["anthropic", "claude-haiku-5-5", "claude-sonnet-4-20250514"],
+    ["gemini", "gemini-3.8-flash", "gemini-2.0-flash"],
+  ] as const)("%s snippets use a current model id", (provider, current, retired) => {
+    for (const language of ["typescript", "python"] as const) {
+      const snippet = getOnboardingSnippet(provider, language, "my-project", "lat-key")
+      if (snippet === null) continue
+      expect(snippet).not.toContain(retired)
+      expect(snippet).toContain(current)
+    }
+  })
+})
